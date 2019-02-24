@@ -94,7 +94,7 @@ class News extends \Object\DataSource {
 		// where
 		$this->query->where('AND', ['a.ns_new_inactive', '=', 0, false]);
 		$organizations = \User::get('organizations');
-		if (!empty($organizations)) {
+		if (!empty($organizations) && !\User::get('super_admin')) {
 			$this->query->where('AND', function (& $query) use ($organizations) {
 				$query = \Numbers\Communication\News\Model\News\Organizations::queryBuilderStatic(['alias' => 'inner_d'])->select();
 				$query->columns(1);

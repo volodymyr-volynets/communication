@@ -11,7 +11,7 @@ class Collection extends \Object\Form\Wrapper\Collection {
 				self::MAIN_ROW => [
 					'order' => 100,
 					self::FORMS => [
-						'um_users' => [
+						'ns_news' => [
 							'model' => '\Numbers\Communication\News\Form\News',
 							'bypass_values' => [
 								'ns_new_id',

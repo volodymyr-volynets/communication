@@ -105,7 +105,7 @@ class News extends \Object\Form\Wrapper\Base {
 		'languages_container' => [
 			'row1' => [
 				'ns_nwslang_language_code' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Language', 'domain' => 'language_code', 'null' => true, 'required' => true, 'percent' => 80, 'method' => 'select', 'options_model' => '\Numbers\Internalization\Internalization\Model\Language\Codes::optionsActive', 'options_params' => ['in_language_code;<>' => 'sm0'], 'onchange' => 'this.form.submit();'],
-				'ns_nwslang_primary' => ['order' => 2, 'label_name' => 'Primary', 'type' => 'boolean', 'percent' => 15],
+				'ns_nwslang_primary' => ['order' => 2, 'label_name' => 'Primary', 'type' => 'boolean', 'percent' => 15, 'required' => 'c'],
 				'ns_nwslang_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
 			'row2' => [
