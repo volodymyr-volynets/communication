@@ -35,7 +35,8 @@ class Categories extends \Object\Table {
 	];
 	public $optimistic_lock = true;
 	public $options_map = [
-		'ns_category_name' => 'name'
+		'ns_category_name' => 'name',
+		'ns_category_inactive' => 'inactive',
 	];
 	public $options_active = [
 		'ns_category_inactive' => 0
