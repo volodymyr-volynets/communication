@@ -1,10 +1,10 @@
 <?php
 
-namespace Numbers\Communication\News\Form\List2;
-class Categories extends \Object\Form\Wrapper\List2 {
-	public $form_link = 'ns_categories_list';
-	public $module_code = 'NS';
-	public $title = 'N/S Categories List';
+namespace Numbers\Communication\Campaigns\Form\List2\Advertising;
+class Codes extends \Object\Form\Wrapper\List2 {
+	public $form_link = 'ca_advertising_codes_list';
+	public $module_code = 'CA';
+	public $title = 'C/A Advertising Codes List';
 	public $options = [
 		'segment' => self::SEGMENT_LIST,
 		'actions' => [
@@ -35,13 +35,13 @@ class Categories extends \Object\Form\Wrapper\List2 {
 			]
 		],
 		'filter' => [
-			'ns_category_id' => [
-				'ns_category_id1' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Category #', 'domain' => 'group_id', 'percent' => 25, 'null' => true, 'query_builder' => 'a.ns_category_id;>='],
-				'ns_category_id2' => ['order' => 2, 'label_name' => 'Category #', 'domain' => 'group_id', 'percent' => 25, 'null' => true, 'query_builder' => 'a.ns_category_id;<='],
-				'ns_category_inactive1' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 50, 'method' => 'multiselect', 'multiple_column' => 1, 'options_model' => '\Object\Data\Model\Inactive', 'query_builder' => 'a.ns_category_inactive;=']
+			'ca_adcode_id' => [
+				'ca_adcode_id1' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Adcode #', 'domain' => 'adcode_id', 'percent' => 25, 'null' => true, 'query_builder' => 'a.ca_adcode_id;>='],
+				'ca_adcode_id2' => ['order' => 2, 'label_name' => 'Adcode #', 'domain' => 'adcode_id', 'percent' => 25, 'null' => true, 'query_builder' => 'a.ca_adcode_id;<='],
+				'ca_adcode_inactive1' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 50, 'method' => 'multiselect', 'multiple_column' => 1, 'options_model' => '\Object\Data\Model\Inactive', 'query_builder' => 'a.ca_adcode_inactive;=']
 			],
 			'full_text_search' => [
-				'full_text_search' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Text Search', 'full_text_search_columns' => ['a.ns_category_name'], 'placeholder' => true, 'domain' => 'name', 'percent' => 100, 'null' => true],
+				'full_text_search' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Text Search', 'full_text_search_columns' => ['a.ca_adcode_name', 'a.ca_adcode_code'], 'placeholder' => true, 'domain' => 'name', 'percent' => 100, 'null' => true],
 			]
 		],
 		'sort' => [
@@ -53,24 +53,24 @@ class Categories extends \Object\Form\Wrapper\List2 {
 		self::LIST_BUTTONS => self::LIST_BUTTONS_DATA,
 		self::LIST_CONTAINER => [
 			'row1' => [
-				'ns_category_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Category #', 'domain' => 'group_id', 'percent' => 10, 'url_edit' => true],
-				'ns_category_name' => ['order' => 2, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 75],
-				'ns_category_order' => ['order' => 3, 'label_name' => 'Order', 'domain' => 'order', 'percent' => 10],
-				'ns_category_inactive' => ['order' => 4, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+				'ca_adcode_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Adcode #', 'domain' => 'adcode_id', 'percent' => 10, 'url_edit' => true],
+				'ca_adcode_name' => ['order' => 2, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 55],
+				'ca_adcode_code' => ['order' => 3, 'label_name' => 'Code', 'domain' => 'group_code', 'percent' => 30],
+				'ca_adcode_inactive' => ['order' => 4, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			]
 		]
 	];
-	public $query_primary_model = '\Numbers\Communication\News\Model\Categories';
+	public $query_primary_model = '\Numbers\Communication\Campaigns\Model\Advertising\Codes';
 	public $list_options = [
 		'pagination_top' => '\Numbers\Frontend\HTML\Form\Renderers\HTML\Pagination\Base',
 		'pagination_bottom' => '\Numbers\Frontend\HTML\Form\Renderers\HTML\Pagination\Base',
 		'default_limit' => 30,
 		'default_sort' => [
-			'ns_category_id' => SORT_ASC
+			'ca_adcode_id' => SORT_ASC
 		]
 	];
 	const LIST_SORT_OPTIONS = [
-		'ns_category_id' => ['name' => 'Group #'],
-		'ns_category_name' => ['name' => 'Name']
+		'ca_adcode_id' => ['name' => 'Adcode #'],
+		'ca_adcode_name' => ['name' => 'Name']
 	];
 }
