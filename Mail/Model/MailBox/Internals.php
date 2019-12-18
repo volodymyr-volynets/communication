@@ -37,7 +37,7 @@ class Internals extends \Object\Table {
 	];
 	public $optimistic_lock = true;
 	public $options_map = [
-		'ml_internalmailbox_title' => 'name',
+		'ml_internalmailbox_name' => 'name',
 		'ml_internalmailbox_inactive' => 'inactive'
 	];
 	public $options_active = [
