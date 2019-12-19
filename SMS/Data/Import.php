@@ -1,6 +1,6 @@
 <?php
 
-namespace Numbers\Communication\Mail\Data;
+namespace Numbers\Communication\SMS\Data;
 class Import extends \Object\Import {
 	public $data = [
 		'modules' => [
@@ -11,11 +11,11 @@ class Import extends \Object\Import {
 			],
 			'data' => [
 				[
-					'sm_module_code' => 'ML',
+					'sm_module_code' => 'S3',
 					'sm_module_type' => 20,
-					'sm_module_name' => 'M/L Mail Management',
-					'sm_module_abbreviation' => 'M/L',
-					'sm_module_icon' => 'fas fa-mail-bulk',
+					'sm_module_name' => 'S/3 SMS Management',
+					'sm_module_abbreviation' => 'S/3',
+					'sm_module_icon' => 'fas fa-sms',
 					'sm_module_transactions' => 0,
 					'sm_module_multiple' => 0,
 					'sm_module_activation_model' => null,
@@ -46,11 +46,11 @@ class Import extends \Object\Import {
 			],
 			'data' => [
 				[
-					'sm_feature_module_code' => 'ML',
-					'sm_feature_code' => 'ML::MAILBOXES',
+					'sm_feature_module_code' => 'S3',
+					'sm_feature_code' => 'S3::SMS',
 					'sm_feature_type' => 10,
-					'sm_feature_name' => 'M/L Mails',
-					'sm_feature_icon' => 'fas fa-mail-bulk',
+					'sm_feature_name' => 'S/3 SMS',
+					'sm_feature_icon' => 'fas fa-sms',
 					'sm_feature_activated_by_default' => 1,
 					'sm_feature_activation_model' => null,
 					'sm_feature_inactive' => 0,

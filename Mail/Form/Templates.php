@@ -13,6 +13,7 @@ class Templates extends \Object\Form\Wrapper\Base {
 			'new' => true,
 			'import' => true
 		],
+		'no_ajax_form_reload' => true
 	];
 	public $containers = [
 		'top' => ['default_row_type' => 'grid', 'order' => 100],
@@ -30,7 +31,7 @@ class Templates extends \Object\Form\Wrapper\Base {
 				'ml_emailtemplate_name' => ['order' => 1, 'row_order' => 200, 'label_name' => 'Name', 'domain' => 'name', 'percent' => 100, 'required' => true],
 			],
 			'ml_emailtemplate_language_code' => [
-				'ml_emailtemplate_language_code' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Language', 'domain' => 'language_code', 'null' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Internalization\Internalization\Model\Language\Codes::optionsActive'],
+				'ml_emailtemplate_language_code' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Language', 'domain' => 'language_code', 'null' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Internalization\Internalization\Model\Language\Codes::optionsActive', 'onchange' => 'this.form.submit();'],
 				'ml_emailtemplate_organization_id' => ['order' => 2, 'label_name' => 'Organization', 'domain' => 'organization_id', 'null' => true, 'percent' => 50, 'method' => 'select', 'options_model' => '\Numbers\Users\Organizations\Model\Organizations::optionsActive'],
 			],
 			'ml_emailtemplate_parent_emailtemplate_id' => [
@@ -41,6 +42,17 @@ class Templates extends \Object\Form\Wrapper\Base {
 			],
 			'ml_emailtemplate_body' => [
 				'ml_emailtemplate_body' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Body', 'type' => 'text', 'null' => true, 'required' => true, 'method' => 'wysiwyg', 'wysiwyg_height' => 500],
+			],
+			'ml_emailtemplate_file_id_1' => [
+				'ml_emailtemplate_file_new' => ['order' => 1, 'row_order' => 600, 'label_name' => 'New Attachment(s)', 'type' => 'mixed', 'percent' => 50, 'method' => 'file', 'null' => true, 'multiple' => false, 'documents_save' => ['prefix' => 'ml_emailtemplate_file_id_', 'max_files' => 5], 'validator_method' => '\Numbers\Users\Documents\Base\Validator\Files::validate', 'validator_params' => ['types' => ['images', 'audio', 'documents', 'archives']]],
+				'ml_emailtemplate_file_list' => ['order' => 3, 'label_name' => 'Existing Attachment(s)', 'type' => 'mixed', 'percent' => 50, 'method' => 'span', 'documents_render_links' => ['prefix' => 'ml_emailtemplate_file_id_', 'max_files' => 5]],
+			],
+			self::HIDDEN => [
+				'ml_emailtemplate_file_id_1' => ['label_name' => 'File 1', 'domain' => 'file_id', 'null' => true, 'method' => 'hidden'],
+				'ml_emailtemplate_file_id_2' => ['label_name' => 'File 2', 'domain' => 'file_id', 'null' => true, 'method' => 'hidden'],
+				'ml_emailtemplate_file_id_3' => ['label_name' => 'File 3', 'domain' => 'file_id', 'null' => true, 'method' => 'hidden'],
+				'ml_emailtemplate_file_id_4' => ['label_name' => 'File 4', 'domain' => 'file_id', 'null' => true, 'method' => 'hidden'],
+				'ml_emailtemplate_file_id_5' => ['label_name' => 'File 5', 'domain' => 'file_id', 'null' => true, 'method' => 'hidden'],
 			]
 		],
 		'buttons' => [
