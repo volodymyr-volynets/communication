@@ -33,7 +33,23 @@ class Internals extends \Object\Form\Wrapper\Base {
 			'details_rendering_type' => 'table',
 			'details_new_rows' => 1,
 			'details_key' => '\Numbers\Communication\Mail\Model\MailBox\Internal\Users',
-			'details_pk' => ['ml_internalmboxorg_user_id'],
+			'details_pk' => ['ml_internalmboxusr_user_id'],
+			'order' => 35002,
+		],
+		'roles_container' => [
+			'type' => 'details',
+			'details_rendering_type' => 'table',
+			'details_new_rows' => 1,
+			'details_key' => '\Numbers\Communication\Mail\Model\MailBox\Internal\Roles',
+			'details_pk' => ['ml_internalmboxrol_role_id'],
+			'order' => 35002,
+		],
+		'teams_container' => [
+			'type' => 'details',
+			'details_rendering_type' => 'table',
+			'details_new_rows' => 1,
+			'details_key' => '\Numbers\Communication\Mail\Model\MailBox\Internal\Teams',
+			'details_pk' => ['ml_internalmboxtem_team_id'],
 			'order' => 35002,
 		],
 	];
@@ -42,6 +58,8 @@ class Internals extends \Object\Form\Wrapper\Base {
 			'general' => ['order' => 100, 'label_name' => 'General'],
 			'organizations' => ['order' => 150, 'label_name' => 'Organizations'],
 			'users' => ['order' => 200, 'label_name' => 'Users'],
+			'roles' => ['order' => 300, 'label_name' => 'Roles'],
+			'teams' => ['order' => 400, 'label_name' => 'Teams'],
 		],
 	];
 	public $elements = [
@@ -63,7 +81,13 @@ class Internals extends \Object\Form\Wrapper\Base {
 				'organizations' => ['container' => 'organizations_container', 'order' => 100],
 			],
 			'users' => [
-				'user' => ['container' => 'users_container', 'order' => 100],
+				'users' => ['container' => 'users_container', 'order' => 100],
+			],
+			'roles' => [
+				'roles' => ['container' => 'roles_container', 'order' => 100],
+			],
+			'teams' => [
+				'teams' => ['container' => 'teams_container', 'order' => 100],
 			]
 		],
 		'general_container' => [
@@ -80,8 +104,20 @@ class Internals extends \Object\Form\Wrapper\Base {
 		],
 		'users_container' => [
 			'row1' => [
-				'ml_internalmboxorg_user_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'User', 'domain' => 'user_id', 'required' => true, 'null' => true, 'details_unique_select' => true, 'percent' => 95, 'method' => 'select', 'tree' => true, 'options_model' => '\Numbers\Users\Users\DataSource\Users::optionsActive', 'onchange' => 'this.form.submit();'],
-				'ml_internalmboxorg_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+				'ml_internalmboxusr_user_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'User', 'domain' => 'user_id', 'required' => true, 'null' => true, 'details_unique_select' => true, 'percent' => 95, 'method' => 'select', 'tree' => true, 'options_model' => '\Numbers\Users\Users\DataSource\Users::optionsActive', 'onchange' => 'this.form.submit();'],
+				'ml_internalmboxusr_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+			]
+		],
+		'roles_container' => [
+			'row1' => [
+				'ml_internalmboxrol_role_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Role', 'domain' => 'role_id', 'required' => true, 'null' => true, 'details_unique_select' => true, 'percent' => 95, 'method' => 'select', 'tree' => true, 'options_model' => '\Numbers\Users\Users\DataSource\Roles::optionsActive', 'onchange' => 'this.form.submit();'],
+				'ml_internalmboxrol_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
+			]
+		],
+		'teams_container' => [
+			'row1' => [
+				'ml_internalmboxtem_team_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Team', 'domain' => 'team_id', 'required' => true, 'null' => true, 'details_unique_select' => true, 'percent' => 95, 'method' => 'select', 'tree' => true, 'options_model' => '\Numbers\Users\Users\DataSource\Teams::optionsActive', 'onchange' => 'this.form.submit();'],
+				'ml_internalmboxtem_inactive' => ['order' => 2, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			]
 		],
 		'buttons' => [
@@ -100,15 +136,27 @@ class Internals extends \Object\Form\Wrapper\Base {
 			],
 			'\Numbers\Communication\Mail\Model\MailBox\Internal\Users' => [
 				'name' => 'Internal Mailbox Users',
-				'pk' => ['ml_internalmboxorg_tenant_id', 'ml_internalmboxorg_internalmailbox_id', 'ml_internalmboxorg_user_id'],
+				'pk' => ['ml_internalmboxusr_tenant_id', 'ml_internalmboxusr_internalmailbox_id', 'ml_internalmboxusr_user_id'],
 				'type' => '1M',
-				'map' => ['ml_internalmailbox_tenant_id' => 'ml_internalmboxorg_tenant_id', 'ml_internalmailbox_id' => 'ml_internalmboxorg_internalmailbox_id']
+				'map' => ['ml_internalmailbox_tenant_id' => 'ml_internalmboxusr_tenant_id', 'ml_internalmailbox_id' => 'ml_internalmboxusr_internalmailbox_id']
+			],
+			'\Numbers\Communication\Mail\Model\MailBox\Internal\Roles' => [
+				'name' => 'Internal Mailbox Roles',
+				'pk' => ['ml_internalmboxrol_tenant_id', 'ml_internalmboxrol_internalmailbox_id', 'ml_internalmboxrol_role_id'],
+				'type' => '1M',
+				'map' => ['ml_internalmailbox_tenant_id' => 'ml_internalmboxrol_tenant_id', 'ml_internalmailbox_id' => 'ml_internalmboxrol_internalmailbox_id']
+			],
+			'\Numbers\Communication\Mail\Model\MailBox\Internal\Teams' => [
+				'name' => 'Internal Mailbox Teams',
+				'pk' => ['ml_internalmboxtem_tenant_id', 'ml_internalmboxtem_internalmailbox_id', 'ml_internalmboxtem_team_id'],
+				'type' => '1M',
+				'map' => ['ml_internalmailbox_tenant_id' => 'ml_internalmboxtem_tenant_id', 'ml_internalmailbox_id' => 'ml_internalmboxtem_internalmailbox_id']
 			]
 		]
 	];
 
 	public function processOptionsModels(& $form, $field_name, $details_key, $details_parent_key, & $where, $neighbouring_values, $details_value) {
-		if ($field_name == 'ml_internalmboxorg_user_id') {
+		if ($field_name == 'ml_internalmboxusr_user_id' || $field_name == 'ml_internalmboxrol_role_id' || $field_name == 'ml_internalmboxtem_team_id') {
 			$where['selected_organizations'] = array_extract_values_by_key($form->values['\Numbers\Communication\Mail\Model\MailBox\Internal\Organizations'], 'ml_internalmboxorg_organization_id', ['unique' => true]);
 		}
 	}
