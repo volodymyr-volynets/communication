@@ -22,7 +22,7 @@ class Templates extends \Object\Form\Wrapper\Base {
 	public $elements = [
 		'top' => [
 			'ml_emailtemplate_id' => [
-				'ml_emailtemplate_id' => ['order' => 1, 'row_order' => 100, 'label_name' => ' Mailbox #', 'domain' => 'mailbox_id_sequence', 'percent' => 50, 'navigation' => true],
+				'ml_emailtemplate_id' => ['order' => 1, 'row_order' => 100, 'label_name' => 'Template #', 'domain' => 'template_id_sequence', 'percent' => 50, 'navigation' => true],
 				'ml_emailtemplate_code' => ['order' => 2, 'label_name' => 'Code', 'domain' => 'group_code', 'null' => true, 'required' => true, 'percent' => 45, 'navigation' => true],
 				'ml_emailtemplate_inactive' => ['order' => 3, 'label_name' => 'Inactive', 'type' => 'boolean', 'percent' => 5]
 			],
@@ -41,6 +41,9 @@ class Templates extends \Object\Form\Wrapper\Base {
 			],
 			'ml_emailtemplate_body' => [
 				'ml_emailtemplate_body' => ['order' => 1, 'row_order' => 500, 'label_name' => 'Body', 'type' => 'text', 'null' => true, 'required' => true, 'method' => 'wysiwyg', 'wysiwyg_height' => 500],
+			],
+			'ml_emailtemplate_emailsignature_id' => [
+				'ml_emailtemplate_emailsignature_id' => ['order' => 1, 'row_order' => 550, 'label_name' => 'Signature', 'domain' => 'signature_id', 'null' => true, 'method' => 'select', 'options_model' => '\Numbers\Communication\Mail\Model\Signatures::optionsActive'],
 			],
 			'ml_emailtemplate_file_id_1' => [
 				'ml_emailtemplate_file_new' => ['order' => 1, 'row_order' => 600, 'label_name' => 'New Attachment(s)', 'type' => 'mixed', 'percent' => 50, 'method' => 'file', 'null' => true, 'multiple' => true, 'documents_save' => ['prefix' => 'ml_emailtemplate_file_id_', 'max_files' => 5], 'validator_method' => '\Numbers\Users\Documents\Base\Validator\Files::validate', 'validator_params' => ['types' => ['images', 'audio', 'documents', 'archives']]],

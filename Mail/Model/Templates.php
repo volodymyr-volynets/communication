@@ -23,6 +23,7 @@ class Templates extends \Object\Table {
 		'ml_emailtemplate_parent_emailtemplate_id' => ['name' => 'Parent Template #', 'domain' => 'template_id', 'null' => true],
 		'ml_emailtemplate_subject' => ['name' => 'Subject', 'domain' => 'description', 'null' => true],
 		'ml_emailtemplate_body' => ['name' => 'Body', 'type' => 'text', 'null' => true],
+		'ml_emailtemplate_emailsignature_id' => ['name' => 'Signature #', 'domain' => 'signature_id', 'null' => true],
 		'ml_emailtemplate_file_id_1' => ['name' => 'File 1', 'domain' => 'file_id', 'null' => true],
 		'ml_emailtemplate_file_id_2' => ['name' => 'File 2', 'domain' => 'file_id', 'null' => true],
 		'ml_emailtemplate_file_id_3' => ['name' => 'File 3', 'domain' => 'file_id', 'null' => true],
@@ -52,7 +53,9 @@ class Templates extends \Object\Table {
 			'foreign_columns' => ['ml_emailtemplate_tenant_id', 'ml_emailtemplate_id']
 		]
 	];
-	public $indexes = [];
+	public $indexes = [
+		'ml_email_templates_fulltext_idx' => ['type' => 'fulltext', 'columns' => ['ml_emailtemplate_code', 'ml_emailtemplate_name']],
+	];
 	public $history = false;
 	public $audit = [
 		'map' => [
