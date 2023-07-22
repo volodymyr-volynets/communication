@@ -32,7 +32,6 @@ class News extends \Object\Form\Wrapper\Base {
 			'details_new_rows' => 1,
 			'details_key' => '\Numbers\Communication\News\Model\News\Organizations',
 			'details_pk' => ['ns_nwsorg_organization_id'],
-			'required' => true,
 			'order' => 35001
 		],
 		'languages_container' => [
@@ -82,6 +81,7 @@ class News extends \Object\Form\Wrapper\Base {
 				'content' => ['container' => 'languages_container', 'order' => 100],
 			],
 			'organizations' => [
+				'all' => ['container' => 'all_organizations_container', 'order' => -100],
 				'organizations' => ['container' => 'organizations_container', 'order' => 100],
 			],
 			'roles' => [
@@ -93,13 +93,19 @@ class News extends \Object\Form\Wrapper\Base {
 			'ns_new_start_date' => [
 				'ns_new_start_date' => ['order' => 1, 'row_order' => 300, 'label_name' => 'Start Date', 'type' => 'date', 'percent' => 25, 'method' => 'calendar', 'calendar_icon' => 'right'],
 				'ns_new_end_date' => ['order' => 2, 'label_name' => 'End Date', 'type' => 'date', 'percent' => 25, 'method' => 'calendar', 'calendar_icon' => 'right'],
-				'ns_new_category_id' => ['order' => 3, 'label_name' => 'Category', 'domain' => 'group_id', 'null' => true, 'required' => true, 'percent' => 45, 'method' => 'select', 'options_model' => '\Numbers\Communication\News\Model\Categories::optionsActive'],
-				'ns_new_hot' => ['order' => 4, 'label_name' => 'Hot', 'type' => 'boolean', 'percent' => 5],
+				'ns_new_category_id' => ['order' => 3, 'label_name' => 'Category', 'domain' => 'group_id', 'null' => true, 'required' => true, 'percent' => 30, 'method' => 'select', 'options_model' => '\Numbers\Communication\News\Model\Categories::optionsActive'],
+				'ns_new_public' => ['order' => 4, 'label_name' => 'Public', 'type' => 'boolean', 'percent' => 5],
+				'ns_new_hot' => ['order' => 5, 'label_name' => 'Hot', 'type' => 'boolean', 'percent' => 5],
 			],
 		],
 		'all_roles_container' => [
 			'row1' => [
 				'ns_new_show_to_all_roles' => ['order' => 1, 'row_order' => 100, 'label_name' => 'All Roles', 'type' => 'boolean'],
+			]
+		],
+		'all_organizations_container' => [
+			'row1' => [
+				'ns_new_all_organizations' => ['order' => 1, 'row_order' => 100, 'label_name' => 'All Organizations', 'type' => 'boolean'],
 			]
 		],
 		'languages_container' => [
@@ -170,6 +176,10 @@ class News extends \Object\Form\Wrapper\Base {
 		// you must set roles or select all
 		if (empty($form->values['\Numbers\Communication\News\Model\News\Roles']) && empty($form->values['ns_new_show_to_all_roles'])) {
 			$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Communication\News\Model\News\Roles[1][ns_nwsrol_role_id]");
+		}
+		// you must set organizations or select all
+		if (empty($form->values['\Numbers\Communication\News\Model\News\Organizations']) && empty($form->values['ns_new_all_organizations'])) {
+			$form->error(DANGER, \Object\Content\Messages::REQUIRED_FIELD, "\Numbers\Communication\News\Model\News\Organizations[1][ns_nwsorg_organization_id]");
 		}
 		// must have primary language
 		$primary_language_code = $form->validateDetailsPrimaryColumn(
