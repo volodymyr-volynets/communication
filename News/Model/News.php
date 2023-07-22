@@ -22,6 +22,8 @@ class News extends \Object\Table {
 		'ns_new_end_date' => ['name' => 'End Date', 'type' => 'date', 'null' => true],
 		'ns_new_category_id' => ['name' => 'Category #', 'domain' => 'group_id'],
 		'ns_new_show_to_all_roles' => ['name' => 'All Roles', 'type' => 'boolean'],
+		'ns_new_all_organizations' => ['name' => 'All Organizations', 'type' => 'boolean'],
+		'ns_new_public' => ['name' => 'Public News', 'type' => 'boolean'],
 		'ns_new_hot' => ['name' => 'Hot', 'type' => 'boolean'],
 		'ns_new_inactive' => ['name' => 'Inactive', 'type' => 'boolean']
 	];

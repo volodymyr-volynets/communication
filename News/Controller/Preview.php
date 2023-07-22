@@ -3,6 +3,7 @@
 namespace Numbers\Communication\News\Controller;
 class Preview extends \Object\Controller\Authorized {
 	public function actionIndex() {
+		$this->title = 'N/S News';
 		$input = \Request::input();
 		$model = new \Numbers\Communication\News\DataSource\News();
 		$model->cache = true;
