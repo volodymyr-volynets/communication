@@ -23,6 +23,8 @@ class News extends \Object\DataSource {
 	public $primary_model = '\Numbers\Communication\News\Model\News';
 	public $parameters = [
 		'include_content' => ['name' => 'Include Content', 'type' => 'boolean'],
+		'skip_counting_users' => ['name' => 'Public', 'type' => 'boolean'],
+		'public' => ['name' => 'Public', 'type' => 'boolean'],
 	];
 
 	public function query($parameters, $options = []) {
@@ -32,7 +34,6 @@ class News extends \Object\DataSource {
 			'ns_new_hot' => 'a.ns_new_hot',
 			'ns_new_category_id' => 'a.ns_new_category_id',
 			'ns_category_name' => 'b.ns_category_name',
-			'ns_new_read_user' => 'c.ns_nwsusr_user_id',
 			'ns_new_inserted_timestamp' => 'a.ns_new_inserted_timestamp'
 		]);
 		if (!empty($parameters['include_content'])) {
@@ -47,10 +48,15 @@ class News extends \Object\DataSource {
 		$this->query->join('INNER', new \Numbers\Communication\News\Model\Categories(), 'b', 'ON', [
 			['AND', ['a.ns_new_category_id', '=', 'b.ns_category_id', true], false]
 		]);
-		$this->query->join('LEFT', new \Numbers\Communication\News\Model\News\Users(), 'c', 'ON', [
-			['AND', ['a.ns_new_id', '=', 'c.ns_nwsusr_news_id', true], false],
-			['AND', ['c.ns_nwsusr_user_id', '=', \User::id()], false]
-		]);
+		if (empty($parameters['skip_counting_users'])) {
+			$this->query->join('LEFT', new \Numbers\Communication\News\Model\News\Users(), 'c', 'ON', [
+				['AND', ['a.ns_new_id', '=', 'c.ns_nwsusr_news_id', true], false],
+				['AND', ['c.ns_nwsusr_user_id', '=', \User::id()], false]
+			]);
+			$this->query->columns([
+				'ns_new_read_user' => 'c.ns_nwsusr_user_id',
+			]);
+		}
 		if (!empty($parameters['include_content'])) {
 			$this->query->join('LEFT', function (& $query) {
 				$query = \Numbers\Communication\News\Model\News\Languages::queryBuilderStatic(['alias' => 'inner_d2'])->select();
@@ -92,6 +98,9 @@ class News extends \Object\DataSource {
 			]);
 		}
 		// where
+		if (isset($parameters['public'])) {
+			$this->query->where('AND', ['a.ns_new_public', '=', $parameters['public'], false]);
+		}
 		$this->query->where('AND', ['a.ns_new_inactive', '=', 0, false]);
 		$organizations = \User::get('organizations');
 		if (!empty($organizations) && !\User::get('super_admin')) {
