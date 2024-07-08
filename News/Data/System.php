@@ -177,7 +177,7 @@ class System extends \Object\Import {
 					'sm_resource_code' => '\Numbers\Communication\News\Controller\Preview',
 					'sm_resource_type' => 100,
 					'sm_resource_classification' => 'Global',
-					'sm_resource_name' => 'N/S News Preview',
+					'sm_resource_name' => 'N/S News (Preview)',
 					'sm_resource_description' => null,
 					'sm_resource_icon' => 'fas fa-newspaper',
 					'sm_resource_module_code' => 'NS',
