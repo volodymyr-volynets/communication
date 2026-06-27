@@ -1,87 +1,128 @@
 <?php
 
+/*
+ * This file is part of Numbers Framework.
+ *
+ * (c) Volodymyr Volynets <volodymyr.volynets@gmail.com>
+ *
+ * This source file is subject to the Apache 2.0 license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Numbers\Communication\News\Model;
-class CategoriesAR extends \Object\ActiveRecord {
-	/**
-	 * @var string
-	 */
-	public string $object_table_class = \Numbers\Communication\News\Model\Categories::class;
 
-	/**
-	 * Constructing object
-	 *
-	 * @param array $options
-	 *		skip_db_object
-	 *		skip_table_object
-	 */
-	public function __construct($options = []) {
-		if (empty($options['skip_table_object'])) {
-			$this->object_table_object = new $this->object_table_class($options);
-		}
-	}
-	/**
-	 * Tenant #
-	 *
-	 *
-	 *
-	 * {domain{tenant_id}}
-	 *
-	 * @var int Domain: tenant_id Type: integer
-	 */
-	public ?int $ns_category_tenant_id = NULL;
+use Object\ActiveRecord;
 
-	/**
-	 * Category #
-	 *
-	 *
-	 *
-	 * {domain{group_id_sequence}}
-	 *
-	 * @var int Domain: group_id_sequence Type: serial
-	 */
-	public ?int $ns_category_id = null;
+class CategoriesAR extends ActiveRecord
+{
+    /**
+     * @var string
+     */
+    public string $object_table_class = Categories::class;
 
-	/**
-	 * Name
-	 *
-	 *
-	 *
-	 * {domain{name}}
-	 *
-	 * @var string Domain: name Type: varchar
-	 */
-	public ?string $ns_category_name = null;
+    /**
+     * @var array
+     */
+    public array $object_table_pk = ['ns_category_tenant_id','ns_category_id'];
+    /**
+     * Tenant #
+     *
+     *
+     *
+     * {domain{tenant_id}}
+     *
+     * @var int|null Domain: tenant_id Type: integer
+     */
+    public int|null $ns_category_tenant_id = null {
+        get => $this->ns_category_tenant_id;
+        set {
+            $this->setFullPkAndFilledColumn('ns_category_tenant_id', $value);
+            $this->ns_category_tenant_id = $value;
+        }
+    }
 
-	/**
-	 * Order
-	 *
-	 *
-	 *
-	 * {domain{order}}
-	 *
-	 * @var int Domain: order Type: integer
-	 */
-	public ?int $ns_category_order = 0;
+    /**
+     * Category #
+     *
+     *
+     *
+     * {domain{group_id_sequence}}
+     *
+     * @var int|null Domain: group_id_sequence Type: serial
+     */
+    public int|null $ns_category_id = null {
+        get => $this->ns_category_id;
+        set {
+            $this->setFullPkAndFilledColumn('ns_category_id', $value);
+            $this->ns_category_id = $value;
+        }
+    }
 
-	/**
-	 * Inactive
-	 *
-	 *
-	 *
-	 *
-	 *
-	 * @var int Type: boolean
-	 */
-	public ?int $ns_category_inactive = 0;
+    /**
+     * Name
+     *
+     *
+     *
+     * {domain{name}}
+     *
+     * @var string|null Domain: name Type: varchar
+     */
+    public string|null $ns_category_name = null {
+        get => $this->ns_category_name;
+        set {
+            $this->setFullPkAndFilledColumn('ns_category_name', $value);
+            $this->ns_category_name = $value;
+        }
+    }
 
-	/**
-	 * Optimistic Lock
-	 *
-	 *
-	 *
-	 * {domain{optimistic_lock}}
-	 *
-	 * @var string Domain: optimistic_lock Type: timestamp
-	 */
-	public ?string $ns_category_optimistic_lock = 'now()';
+    /**
+     * Order
+     *
+     *
+     *
+     * {domain{order}}
+     *
+     * @var int|null Domain: order Type: integer
+     */
+    public int|null $ns_category_order = 0 {
+        get => $this->ns_category_order;
+        set {
+            $this->setFullPkAndFilledColumn('ns_category_order', $value);
+            $this->ns_category_order = $value;
+        }
+    }
+
+    /**
+     * Inactive
+     *
+     *
+     *
+     *
+     *
+     * @var int|null Type: boolean
+     */
+    public int|null $ns_category_inactive = 0 {
+        get => $this->ns_category_inactive;
+        set {
+            $this->setFullPkAndFilledColumn('ns_category_inactive', $value);
+            $this->ns_category_inactive = $value;
+        }
+    }
+
+    /**
+     * Optimistic Lock
+     *
+     *
+     *
+     * {domain{optimistic_lock}}
+     *
+     * @var string|null Domain: optimistic_lock Type: timestamp
+     */
+    public string|null $ns_category_optimistic_lock = 'now()' {
+        get => $this->ns_category_optimistic_lock;
+        set {
+            $this->setFullPkAndFilledColumn('ns_category_optimistic_lock', $value);
+            $this->ns_category_optimistic_lock = $value;
+        }
+    }
 }
